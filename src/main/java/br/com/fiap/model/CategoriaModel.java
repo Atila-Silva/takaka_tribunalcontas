@@ -3,10 +3,13 @@ package br.com.fiap.model;
 import java.util.List;
 
 import javax.persistence.Column;
+import javax.persistence.ConstraintMode;
 import javax.persistence.Entity;
+import javax.persistence.ForeignKey;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
@@ -55,13 +58,13 @@ public class CategoriaModel {
 		this.nomeCategoria = nomeCategoria;
 	}
 
-	@JsonIgnore
-	@OneToMany(mappedBy = "categoria")
+	@OneToMany
+    @JoinColumn(name = "ID_CATEGORIA", foreignKey = @ForeignKey(ConstraintMode.NO_CONSTRAINT))
 	public List<ItemModel> getItens() {
 		return itens;
 	}
 
-	public void setProdutos(List<ItemModel> produtos) {
+	public void setItens(List<ItemModel> itens) {
 		this.itens = itens;
 	}
 
