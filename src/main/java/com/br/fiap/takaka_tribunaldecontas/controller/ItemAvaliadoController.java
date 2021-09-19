@@ -1,4 +1,4 @@
-package br.com.fiap.controller;
+package com.br.fiap.takaka_tribunaldecontas.controller;
 
 import java.net.URI;
 import java.util.List;
@@ -7,6 +7,7 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,63 +19,67 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import br.com.fiap.model.CategoriaModel;
-import br.com.fiap.repository.CategoriaRepository;
+import com.br.fiap.takaka_tribunaldecontas.model.ItemAvaliadoModel;
+import com.br.fiap.takaka_tribunaldecontas.repository.ItemAvaliadoRepository;
+
 
 @RestController
-@RequestMapping("/categoria")
-public class CategoriaController {
-
+@RequestMapping("/itens")
+public class ItemAvaliadoController {
+	
 	@Autowired
-	public CategoriaRepository repository;
-
+	ItemAvaliadoRepository repository;
+	
 	@GetMapping()
-	public ResponseEntity<List<CategoriaModel>> findAll() {
-
-		List<CategoriaModel> categorias = repository.findAll();
-		return ResponseEntity.ok(categorias);
+	public ResponseEntity<List<ItemAvaliadoModel>> findAll (Model model){
+		
+		List<ItemAvaliadoModel> itens = repository.findAll();
+		return ResponseEntity.ok(itens);
 	}
-
+	
 	@GetMapping("/{id}")
-	public ResponseEntity<CategoriaModel> findById(@PathVariable("id") long id) {
-
-		CategoriaModel categoria = repository.findById(id).get();
-		return ResponseEntity.ok(categoria);
+	public ResponseEntity<ItemAvaliadoModel> findById(@PathVariable("id") long id){
+		
+		ItemAvaliadoModel item = repository.findById(id).get();
+		return ResponseEntity.ok(item);
+		
 	}
-
+	
 	@PostMapping()
-	public ResponseEntity save(@RequestBody @Valid CategoriaModel categoriaModel, BindingResult bindingResult) {
-
+	public ResponseEntity<?> save (@RequestBody @Valid ItemAvaliadoModel itemAvaliadoModel, BindingResult bindingResult ){
+		
 		if (bindingResult.hasErrors()) {
 			return ResponseEntity.badRequest().build();
 		}
-
-		CategoriaModel categoria = repository.save(categoriaModel);
-
+		
+		ItemAvaliadoModel item = repository.save(itemAvaliadoModel);
+		
 		URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
-				.buildAndExpand(categoria.getIdCategoria()).toUri();
-
+				.buildAndExpand(item.getId()).toUri();
+		
 		return ResponseEntity.created(location).build();
 	}
-
+	
 	@PutMapping("/{id}")
-	public ResponseEntity update(@PathVariable("id") long id, @RequestBody @Valid CategoriaModel categoriaModel,
-			BindingResult bindingResult) {
-
-		if (bindingResult.hasErrors()) {
+	public ResponseEntity<?> update(@PathVariable("id") long id, @RequestBody @Valid ItemAvaliadoModel itemAvaliadoModel, BindingResult bindingResult) {
+		
+		if(bindingResult.hasErrors()) {
 			return ResponseEntity.badRequest().build();
 		}
-
-		categoriaModel.setIdCategoria(id);
-		repository.save(categoriaModel);
-
+		
+		itemAvaliadoModel.setId(id);
+		repository.save(itemAvaliadoModel);
+		
 		return ResponseEntity.ok().build();
 	}
-
+	
 	@DeleteMapping("/{id}")
-	public ResponseEntity deleteById(@PathVariable("id") long id) {
-
+	public ResponseEntity<?> deleteById(@PathVariable("id") long id) {
+		
 		repository.deleteById(id);
 		return ResponseEntity.noContent().build();
 	}
+	
+	
+
 }
