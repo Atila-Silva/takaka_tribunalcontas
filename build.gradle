@@ -4,7 +4,7 @@ plugins {
 	id 'java'
 }
 
-group = 'com.br.fiap'
+group = 'com.br.takaka'
 version = '0.0.1-SNAPSHOT'
 sourceCompatibility = '1.8'
 
@@ -13,9 +13,10 @@ repositories {
 }
 
 dependencies {
+	implementation 'org.springframework.boot:spring-boot-starter'
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	
-// https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-validation
-implementation group: 'org.springframework.boot', name: 'spring-boot-starter-validation', version: '2.5.0'
+	implementation group: 'org.springframework.boot', name: 'spring-boot-starter-validation', version: '2.5.0'
 
 implementation 'org.springframework.boot:spring-boot-starter-actuator'
 implementation 'org.springframework.boot:spring-boot-starter-data-jdbc'
@@ -43,7 +44,6 @@ exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
 //providedRuntime 'javax.servlet:jstl'
 //providedRuntime 'org.apache.tomcat.embed:tomcat-embed-jasper'
 }
-
 
 test {
 	useJUnitPlatform()

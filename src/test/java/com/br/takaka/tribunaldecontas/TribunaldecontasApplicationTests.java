@@ -1,10 +1,10 @@
-package com.br.fiap.takaka_trbunaldecontas;
+package com.br.takaka.tribunaldecontas;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class TakakaTrbunaldecontasApplicationTests {
+class TribunaldecontasApplicationTests {
 
 	@Test
 	void contextLoads() {

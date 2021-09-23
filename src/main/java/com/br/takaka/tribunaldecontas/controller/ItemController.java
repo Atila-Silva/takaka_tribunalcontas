@@ -1,4 +1,4 @@
-package com.br.fiap.takaka_tribunaldecontas.controller;
+package com.br.takaka.tribunaldecontas.controller;
 
 import java.net.URI;
 import java.util.List;
@@ -19,57 +19,58 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import com.br.fiap.takaka_tribunaldecontas.model.ItemAvaliadoModel;
-import com.br.fiap.takaka_tribunaldecontas.repository.ItemAvaliadoRepository;
+import com.br.takaka.tribunaldecontas.model.ItemModel;
+import com.br.takaka.tribunaldecontas.repository.CategoriaRepository;
+import com.br.takaka.tribunaldecontas.repository.ItemRepository;
 
 
 @RestController
-@RequestMapping("/itens")
-public class ItemAvaliadoController {
-	
+@RequestMapping("/item")
+public class ItemController {
 	@Autowired
-	ItemAvaliadoRepository repository;
-	
+	public ItemRepository repository;
+
+	@Autowired
+	public CategoriaRepository categoriaRepository;
+
 	@GetMapping()
-	public ResponseEntity<List<ItemAvaliadoModel>> findAll (Model model){
-		
-		List<ItemAvaliadoModel> itens = repository.findAll();
+	public ResponseEntity<List<ItemModel>> findAll(Model model) {
+
+		List<ItemModel> itens = repository.findAll();
 		return ResponseEntity.ok(itens);
 	}
-	
+
 	@GetMapping("/{id}")
-	public ResponseEntity<ItemAvaliadoModel> findById(@PathVariable("id") long id){
-		
-		ItemAvaliadoModel item = repository.findById(id).get();
-		return ResponseEntity.ok(item);
-		
+	public ResponseEntity<ItemModel> findById(@PathVariable("id") long id) {
+
+		ItemModel itens = repository.findById(id).get();
+		return ResponseEntity.ok(itens);
 	}
-	
+
 	@PostMapping()
-	public ResponseEntity<?> save (@RequestBody @Valid ItemAvaliadoModel itemAvaliadoModel, BindingResult bindingResult ){
-		
+	public ResponseEntity<?> save(@RequestBody @Valid ItemModel itemModel, BindingResult bindingResult) {
+
 		if (bindingResult.hasErrors()) {
 			return ResponseEntity.badRequest().build();
 		}
-		
-		ItemAvaliadoModel item = repository.save(itemAvaliadoModel);
-		
-		URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
-				.buildAndExpand(item.getId()).toUri();
-		
+
+		ItemModel item = repository.save(itemModel);
+
+		URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(item.getId())
+				.toUri();
+
 		return ResponseEntity.created(location).build();
 	}
-	
 	@PutMapping("/{id}")
-	public ResponseEntity<?> update(@PathVariable("id") long id, @RequestBody @Valid ItemAvaliadoModel itemAvaliadoModel, BindingResult bindingResult) {
+	public ResponseEntity<?> update(@PathVariable("id") long id, @RequestBody @Valid ItemModel itemModel, BindingResult bindingResult) {
 		
 		if(bindingResult.hasErrors()) {
 			return ResponseEntity.badRequest().build();
 		}
 		
-		itemAvaliadoModel.setId(id);
-		repository.save(itemAvaliadoModel);
-		
+		itemModel.setId(id);
+		repository.save(itemModel);
+//		produtoRepository.updateProductNameAndSku(produtoModel.getNome(), produtoModel.getSku(), produtoModel.getId());
 		return ResponseEntity.ok().build();
 	}
 	
@@ -79,7 +80,5 @@ public class ItemAvaliadoController {
 		repository.deleteById(id);
 		return ResponseEntity.noContent().build();
 	}
-	
-	
 
 }
