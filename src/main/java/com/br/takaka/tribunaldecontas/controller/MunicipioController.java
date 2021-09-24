@@ -77,5 +77,15 @@ public class MunicipioController {
 		repository.deleteById(id);
 		return ResponseEntity.noContent().build();
 	}
+	
+	@GetMapping("/criarmunicipio")
+	public void criaruser() {
+		repository.save(new MunicipioModel(123341, "Maua", "www.maua"));
+		repository.save(new MunicipioModel(651655, "Guarulhos", "www.Guarulhos"));
+		repository.save(new MunicipioModel(984941, "bauru", "www.bauru"));
+		repository.save(new MunicipioModel(659812, "osasco", "www.osasco"));
+		repository.save(new MunicipioModel(984212, "santo andre", "www.santo"));
+		
+	}
 
 }

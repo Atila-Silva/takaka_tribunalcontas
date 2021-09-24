@@ -43,6 +43,11 @@ exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
 
 //providedRuntime 'javax.servlet:jstl'
 //providedRuntime 'org.apache.tomcat.embed:tomcat-embed-jasper'
+
+// https://mvnrepository.com/artifact/org.springframework.data/spring-data-jpa
+implementation group: 'org.springframework.data', name: 'spring-data-jpa', version: '2.5.5'
+
+
 }
 
 test {

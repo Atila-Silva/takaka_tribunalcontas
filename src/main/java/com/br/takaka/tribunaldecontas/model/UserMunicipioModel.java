@@ -1,12 +1,7 @@
 package com.br.takaka.tribunaldecontas.model;
 
-import java.time.LocalDateTime;
-
 import javax.persistence.Column;
-import javax.persistence.ConstraintMode;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.ForeignKey;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -26,17 +21,17 @@ public class UserMunicipioModel {
 	private String emailUserMunicipio;
 	private String senhaUserMunicipio;
 	private MunicipioModel municipio;
-	private LocalDateTime data = LocalDateTime.now();
 	
 	
 	public UserMunicipioModel() {	}
 
 
-	public UserMunicipioModel(String nomeUserMunicipio, String emailUserMunicipio, String senhaUserMunicipio) {
+	public UserMunicipioModel(String nomeUserMunicipio, String emailUserMunicipio, String senhaUserMunicipio, MunicipioModel municipio) {
 		super();
 		this.nomeUserMunicipio = nomeUserMunicipio;
 		this.emailUserMunicipio = emailUserMunicipio;
 		this.senhaUserMunicipio = senhaUserMunicipio;
+		this.municipio = municipio;
 	}
 
 	@Id
@@ -94,14 +89,8 @@ public class UserMunicipioModel {
 		this.senhaUserMunicipio = senhaUserMunicipio;
 	}
 
-	@Column(name = "DATA_USER_MUNICIPIO")
-	public LocalDateTime getData() {
-		return data;
-	}
-
-
-	@ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "IBGE_MUNICIPIO", foreignKey = @ForeignKey(ConstraintMode.NO_CONSTRAINT) )
+	@ManyToOne()
+    @JoinColumn(name = "IBGE_MUNICIPIO", nullable = false )
    public MunicipioModel getMunicipio() {
 		return municipio;
 	}

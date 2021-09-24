@@ -80,4 +80,14 @@ public class UserMunicipioController {
 		return ResponseEntity.noContent().build();
 	}
 	
+	@GetMapping("/criaruser")
+	public void criaruser() {
+		repository.save(new UserMunicipioModel("Atila", "atila@atila", "kkkkkk", municipioRepository.findById((long) 123341).get()));
+		repository.save(new UserMunicipioModel("jair", "jair@jair", "kkkkkk", municipioRepository.findById((long) 651655).get()));
+		repository.save(new UserMunicipioModel("ian", "ian@ian", "kkkkkk", municipioRepository.findById((long) 984941).get()));
+		repository.save(new UserMunicipioModel("carlos", "carlos@carlos", "kkkkkk", municipioRepository.findById((long) 659812).get()));
+		repository.save(new UserMunicipioModel("leo", "leo@leo", "kkkkkk", municipioRepository.findById((long) 984212).get()));
+		repository.save(new UserMunicipioModel("carol", "carol@carol", "kkkkkk", municipioRepository.findById((long) 984941).get()));
+	}
+	
 }
