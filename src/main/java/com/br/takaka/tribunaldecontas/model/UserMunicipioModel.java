@@ -1,5 +1,7 @@
 package com.br.takaka.tribunaldecontas.model;
 
+import java.time.LocalDateTime;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -20,7 +22,10 @@ public class UserMunicipioModel {
 	private String nomeUserMunicipio;
 	private String emailUserMunicipio;
 	private String senhaUserMunicipio;
+	private LocalDateTime dataCadastro;
+
 	private MunicipioModel municipio;
+	
 	
 	
 	public UserMunicipioModel() {	}
@@ -32,6 +37,7 @@ public class UserMunicipioModel {
 		this.emailUserMunicipio = emailUserMunicipio;
 		this.senhaUserMunicipio = senhaUserMunicipio;
 		this.municipio = municipio;
+		this.dataCadastro = LocalDateTime.now();
 	}
 
 	@Id
@@ -100,8 +106,17 @@ public class UserMunicipioModel {
 		this.municipio = municipio;
 	}
 	
-	
-	
+	@Column(name = "DATA_CADASTRO")
+	public LocalDateTime getDataCadastro() {
+		return dataCadastro;
+	}
+
+
+	public void setDataCadastro(LocalDateTime dataCadastro) {
+		this.dataCadastro = dataCadastro;
+	}
+
+
 	
 	
 	

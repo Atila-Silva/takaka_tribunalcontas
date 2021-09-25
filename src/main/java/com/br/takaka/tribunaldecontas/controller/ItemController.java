@@ -80,5 +80,15 @@ public class ItemController {
 		repository.deleteById(id);
 		return ResponseEntity.noContent().build();
 	}
+	
+	@GetMapping("/criaritem")
+	public void criar() {
+		repository.save(new ItemModel("nome da rua", categoriaRepository.getById((long) 1)));
+		repository.save(new ItemModel("valor gasto", categoriaRepository.getById((long) 2)));
+		repository.save(new ItemModel("aonde foi gasto", categoriaRepository.getById((long) 3)));
+		repository.save(new ItemModel("tipo de serviço", categoriaRepository.getById((long) 4)));
+		repository.save(new ItemModel("quando foi gasto", categoriaRepository.getById((long) 2)));
+		repository.save(new ItemModel("telefone", categoriaRepository.getById((long) 1)));
+	}
 
 }

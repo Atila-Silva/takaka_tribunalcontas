@@ -2,6 +2,8 @@ package com.br.takaka.tribunaldecontas.model;
 
 
 
+import java.time.LocalDateTime;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -16,18 +18,17 @@ public class MunicipioModel {
 	private long ibgeMunicipio;
 	private String nomeMunicipio;
 	private String urlMunicipio;
-
-	public MunicipioModel() {	}
- 
+	private LocalDateTime dataCadastro;
 
 	
-
-
+	public MunicipioModel() {	}
+ 
 	public MunicipioModel(long ibgeMunicipio, String nomeMunicipio, String urlMunicipio) {
 		super();
 		this.ibgeMunicipio = ibgeMunicipio;
 		this.nomeMunicipio = nomeMunicipio;
 		this.urlMunicipio = urlMunicipio;
+		this.dataCadastro = LocalDateTime.now();
 	}
 
 	@Id
@@ -66,8 +67,16 @@ public class MunicipioModel {
 	public void setUrlMunicipio(String urlMunicipio) {
 		this.urlMunicipio = urlMunicipio;
 	}
-
 	
+	@Column(name = "DATA_CADASTRO")
+	public LocalDateTime getDataCadastro() {
+		return dataCadastro;
+	}
+
+	public void setDataCadastro(LocalDateTime dataCadastro) {
+		this.dataCadastro = dataCadastro;
+	}
+
 	
 	
 	

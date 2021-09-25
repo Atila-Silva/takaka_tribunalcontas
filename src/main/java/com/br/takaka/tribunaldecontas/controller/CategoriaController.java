@@ -79,4 +79,12 @@ public class CategoriaController {
 		repository.deleteById(id);
 		return ResponseEntity.noContent().build();
 	}
+	
+	@GetMapping("/criarcategoria")
+	public void criar() {
+		repository.save(new CategoriaModel("Endereço"));
+		repository.save(new CategoriaModel("gastos"));
+		repository.save(new CategoriaModel("custos"));
+		repository.save(new CategoriaModel("serviços"));
+	}
 }
