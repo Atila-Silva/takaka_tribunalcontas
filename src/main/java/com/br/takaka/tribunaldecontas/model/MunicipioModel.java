@@ -57,7 +57,6 @@ public class MunicipioModel {
 
 
 	@Column(name = "URL_MUNICIPIO")
-	@NotNull(message = "Url obrigatória")
 	@Size(min = 2, max = 50, message = "A url deve ser entre 2 e 50 caracteres")
 	public String getUrlMunicipio() {
 		return urlMunicipio;
