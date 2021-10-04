@@ -17,6 +17,9 @@ import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 @Entity
 @Table(name = "AVALIACAO")
 public class AvaliacaoModel {
@@ -64,6 +67,11 @@ public class AvaliacaoModel {
 	}
 	
 	
+	
+	public void setRespostas(List<RespostaModel> respostas) {
+		this.respostas = respostas;
+	}
+
 	public void setRespostas(RespostaModel respostas) {
 		this.respostas.add(respostas);
 		
@@ -77,11 +85,6 @@ public class AvaliacaoModel {
 	public void setDataAvaliacao(LocalDateTime dataAvaliacao) {
 		this.dataAvaliacao = dataAvaliacao;
 	}
-	
-	
-	
-	
-	
-	
+
 
 }
