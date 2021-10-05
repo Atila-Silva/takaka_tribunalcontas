@@ -21,7 +21,7 @@ public class MunicipioModel {
 	private long ibgeMunicipio;
 	private String nomeMunicipio;
 	private String urlMunicipio;
-	private LocalDateTime dataCadastro;
+	private LocalDateTime dataCadastro = LocalDateTime.now();
 
 	
 	public MunicipioModel() {	}
@@ -31,7 +31,6 @@ public class MunicipioModel {
 		this.ibgeMunicipio = ibgeMunicipio;
 		this.nomeMunicipio = nomeMunicipio;
 		this.urlMunicipio = urlMunicipio;
-		this.dataCadastro = LocalDateTime.now();
 	}
 
 	@Id

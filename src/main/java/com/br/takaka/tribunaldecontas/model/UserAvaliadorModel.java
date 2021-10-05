@@ -38,7 +38,7 @@ public class UserAvaliadorModel {
 	@Id
 	@Column(name = "ID_AVALIADOR")
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "USER_AVA_SEQ")
-	@SequenceGenerator(name = "USER_AVA_SEQ", sequenceName = "USER_MUN_SEQ", allocationSize = 1)
+	@SequenceGenerator(name = "USER_AVA_SEQ", sequenceName = "USER_AVA_SEQ", allocationSize = 1)
 	public long getId() {
 		return id;
 	}

@@ -4,7 +4,6 @@ import java.time.LocalDateTime;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -13,7 +12,9 @@ import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 @Entity
@@ -52,7 +53,7 @@ public class RespostaModel {
 		this.id = id;
 	}
 
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne()
     @JoinColumn(name = "ID_USER_MUNICIPIO", nullable = false )
 	public UserAvaliadorModel getUserAvaliador() {
 		return UserAvaliador;
@@ -62,7 +63,8 @@ public class RespostaModel {
 		UserAvaliador = userAvaliador;
 	}
 	
-	@ManyToOne(fetch = FetchType.LAZY)
+	@JsonIgnore
+	@ManyToOne()
     @JoinColumn(name = "ID_AVALIACAO", nullable = false )
 	public AvaliacaoModel getAvaliacao() {
 		return avaliacao;
@@ -72,7 +74,7 @@ public class RespostaModel {
 		this.avaliacao = avaliacao;
 	}
 	
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne()
     @JoinColumn(name = "ID_ITEM", nullable = false )
 	public ItemModel getItemAvaliacao() {
 		return itemAvaliacao;
