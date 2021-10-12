@@ -13,6 +13,8 @@ import javax.validation.constraints.Size;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+import io.swagger.annotations.ApiModelProperty;
+
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 @Entity
 @Table(name = "TB_CATEGORIA")
@@ -33,6 +35,7 @@ public class CategoriaModel {
 	@Column(name = "ID_CATEGORIA")
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "CATEGORIA_SEQ")
 	@SequenceGenerator(name = "CATEGORIA_SEQ", sequenceName = "CATEGORIA_SEQ", allocationSize = 1)
+	@ApiModelProperty(value = "ID da categoria")
 	public long getIdCategoria() {
 		return idCategoria;
 	}
@@ -44,6 +47,7 @@ public class CategoriaModel {
 	@Column(name = "NOME_CATEGORIA")
 	@NotNull(message = "Nome obrigatório")
 	@Size(min = 2, max = 50, message = "NOME deve ser entre 2 e 40 caracteres")
+	@ApiModelProperty(value = "Nome da categoria")
 	public String getNomeCategoria() {
 		return nomeCategoria;
 	}

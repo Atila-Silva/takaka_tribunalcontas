@@ -21,6 +21,8 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import com.br.takaka.tribunaldecontas.model.MunicipioModel;
 import com.br.takaka.tribunaldecontas.repository.MunicipioRepository;
 
+import io.swagger.annotations.ApiOperation;
+
 @RestController
 @RequestMapping("/municipio")
 public class MunicipioController {
@@ -29,6 +31,7 @@ public class MunicipioController {
 	public MunicipioRepository repository;
 	
 	@GetMapping()
+	@ApiOperation(value = "Lista de municipios")
 	public ResponseEntity<List<MunicipioModel>> findAll() {
 
 		List<MunicipioModel> municipios = repository.findAll();
@@ -36,6 +39,7 @@ public class MunicipioController {
 	}
 
 	@GetMapping("/{id}")
+	@ApiOperation(value = "Municipios por ID")
 	public ResponseEntity<MunicipioModel> findById(@PathVariable("id") long id) {
 
 		MunicipioModel municipio = repository.findById(id).get();
@@ -43,6 +47,7 @@ public class MunicipioController {
 	}
 
 	@PostMapping()
+	@ApiOperation(value = "Salvar novo municipios")
 	public ResponseEntity<?> save(@RequestBody @Valid MunicipioModel municipioModel, BindingResult bindingResult) {
 
 		if (bindingResult.hasErrors()) {
@@ -58,6 +63,7 @@ public class MunicipioController {
 	}
 
 	@PutMapping("/{id}")
+	@ApiOperation(value = "Alteção no municipios")
 	public ResponseEntity<?> update(@PathVariable("ibge") long ibge, @RequestBody @Valid MunicipioModel municipioModel,
 			BindingResult bindingResult) {
 
@@ -72,6 +78,7 @@ public class MunicipioController {
 	}
 
 	@DeleteMapping("/{id}")
+	@ApiOperation(value = "Excluir municipios")
 	public ResponseEntity<?> deleteById(@PathVariable("id") long id) {
 
 		repository.deleteById(id);
@@ -79,6 +86,7 @@ public class MunicipioController {
 	}
 	
 	@GetMapping("/criarmunicipio")
+	@ApiOperation(value = "criar")
 	public void criaruser() {
 		repository.save(new MunicipioModel(123341, "Maua", "www.maua"));
 		repository.save(new MunicipioModel(651655, "Guarulhos", "www.Guarulhos"));

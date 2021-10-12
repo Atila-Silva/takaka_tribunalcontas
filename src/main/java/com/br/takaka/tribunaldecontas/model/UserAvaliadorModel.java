@@ -12,6 +12,8 @@ import javax.validation.constraints.Size;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+import io.swagger.annotations.ApiModelProperty;
+
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 @Entity
 @Table(name = "USER_AVALIADOR")
@@ -39,6 +41,7 @@ public class UserAvaliadorModel {
 	@Column(name = "ID_AVALIADOR")
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "USER_AVA_SEQ")
 	@SequenceGenerator(name = "USER_AVA_SEQ", sequenceName = "USER_AVA_SEQ", allocationSize = 1)
+	@ApiModelProperty(value = "ID da usuario avaliação")
 	public long getId() {
 		return id;
 	}
@@ -50,6 +53,7 @@ public class UserAvaliadorModel {
 	@Column(name = "NOME_AVALIADOR")
 	@NotNull(message = "Nome obrigatório")
 	@Size(min = 2, max = 50, message = "NOME deve ser entre 2 e 40 caracteres")
+	@ApiModelProperty(value = "Nome do usuario Avaliação")
 	public String getNome() {
 		return nome;
 	}
@@ -60,6 +64,7 @@ public class UserAvaliadorModel {
 	
 	@Column(name = "EMAIL_AVALIADOR")
 	@NotNull(message = "Email obrigatório")
+	@ApiModelProperty(value = "email do usuario Avaliação")
 	@Size(min = 2, max = 50, message = "Email deve ser entre 2 e 40 caracteres")
 	public String getEmail() {
 		return email;
@@ -72,6 +77,7 @@ public class UserAvaliadorModel {
 	@Column(name = "SENHA_AVALIADOR")
 	@NotNull(message = "Senha obrigatório")
 	@Size(min = 2, max = 8, message = "Senha deve ser entre 2 e 8 caracteres")
+	@ApiModelProperty(value = "Senha do usuario Avaliação")
 	public String getSenha() {
 		return senha;
 	}

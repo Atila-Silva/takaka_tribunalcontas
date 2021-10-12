@@ -23,6 +23,8 @@ import com.br.takaka.tribunaldecontas.model.ItemModel;
 import com.br.takaka.tribunaldecontas.repository.CategoriaRepository;
 import com.br.takaka.tribunaldecontas.repository.ItemRepository;
 
+import io.swagger.annotations.ApiOperation;
+
 
 @RestController
 @RequestMapping("/item")
@@ -34,6 +36,7 @@ public class ItemController {
 	public CategoriaRepository categoriaRepository;
 
 	@GetMapping()
+	@ApiOperation(value = "Lista de Itens")
 	public ResponseEntity<List<ItemModel>> findAll(Model model) {
 
 		List<ItemModel> itens = repository.findAll();
@@ -41,6 +44,7 @@ public class ItemController {
 	}
 
 	@GetMapping("/{id}")
+	@ApiOperation(value = "Avaliação por Item")
 	public ResponseEntity<ItemModel> findById(@PathVariable("id") long id) {
 
 		ItemModel itens = repository.findById(id).get();
@@ -48,6 +52,7 @@ public class ItemController {
 	}
 
 	@PostMapping()
+	@ApiOperation(value = "Salvar nova Item")
 	public ResponseEntity<?> save(@RequestBody @Valid ItemModel itemModel, BindingResult bindingResult) {
 
 		if (bindingResult.hasErrors()) {
@@ -62,6 +67,7 @@ public class ItemController {
 		return ResponseEntity.created(location).build();
 	}
 	@PutMapping("/{id}")
+	@ApiOperation(value = "Alteração em Item")
 	public ResponseEntity<?> update(@PathVariable("id") long id, @RequestBody @Valid ItemModel itemModel, BindingResult bindingResult) {
 		
 		if(bindingResult.hasErrors()) {
@@ -75,6 +81,7 @@ public class ItemController {
 	}
 	
 	@DeleteMapping("/{id}")
+	@ApiOperation(value = "Excluir Item")
 	public ResponseEntity<?> deleteById(@PathVariable("id") long id) {
 		
 		repository.deleteById(id);
@@ -82,6 +89,7 @@ public class ItemController {
 	}
 	
 	@GetMapping("/criaritem")
+	@ApiOperation(value = "criar")
 	public void criar() {
 		repository.save(new ItemModel("nome da rua", categoriaRepository.getById((long) 1)));
 		repository.save(new ItemModel("valor gasto", categoriaRepository.getById((long) 2)));

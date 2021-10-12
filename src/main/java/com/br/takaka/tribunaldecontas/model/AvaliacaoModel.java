@@ -19,6 +19,8 @@ import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+import io.swagger.annotations.ApiModelProperty;
+
 
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 @Entity
@@ -42,6 +44,7 @@ public class AvaliacaoModel {
 	@Column(name = "ID_AVALIACAO")
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "AVALIACAO_SEQ")
 	@SequenceGenerator(name = "AVALIACAO_SEQ", sequenceName = "AVALIACAO_SEQ", allocationSize = 1)
+	@ApiModelProperty(value = "ID da Avaliação")
 	public Long getId() {
 		return id;
 	}
@@ -53,6 +56,7 @@ public class AvaliacaoModel {
 
 	@ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "IBGE_MUNICIPIO", nullable = false )
+	@ApiModelProperty(value = "Municipio da Avaliação")
 	public MunicipioModel getMunicipio() {
 		return municipio;
 	}
@@ -63,6 +67,7 @@ public class AvaliacaoModel {
 	
 	
 	@OneToMany(mappedBy = "avaliacao", cascade = CascadeType.ALL)
+	@ApiModelProperty(value = "Lista de resposta da avaliações")
 	public List<RespostaModel> getRespostas() {
 		return respostas;
 	}
@@ -79,6 +84,7 @@ public class AvaliacaoModel {
 	}
 
 	@Column(name = "DATA_AVALIACAO")
+	@ApiModelProperty(value = "Data da Avaliação")
 	public LocalDateTime getDataAvaliacao() {
 		return dataAvaliacao;
 	}

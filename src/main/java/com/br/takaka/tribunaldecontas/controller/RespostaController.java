@@ -24,6 +24,8 @@ import com.br.takaka.tribunaldecontas.repository.ItemRepository;
 import com.br.takaka.tribunaldecontas.repository.RespostaRepository;
 import com.br.takaka.tribunaldecontas.repository.UserAvaliadorRepository;
 
+import io.swagger.annotations.ApiOperation;
+
 @RestController
 @RequestMapping("/respostas")
 public class RespostaController {
@@ -41,6 +43,7 @@ public class RespostaController {
 	public ItemRepository itemRepository;
 
 	@GetMapping()
+	@ApiOperation(value = "Lista de respostas")
 	public ResponseEntity<List<RespostaModel>> findAll() {
 
 		List<RespostaModel> respostas = repository.findAll();
@@ -48,6 +51,7 @@ public class RespostaController {
 	}
 
 	@GetMapping("/{id}")
+	@ApiOperation(value = "Resposta por ID")
 	public ResponseEntity<RespostaModel> findById(@PathVariable("id") long id) {
 
 		RespostaModel resposta = repository.findById(id).get();
@@ -55,6 +59,7 @@ public class RespostaController {
 	}
 
 	@PostMapping()
+	@ApiOperation(value = "Salvar nova Resposta")
 	public ResponseEntity<?> save(@RequestBody @Valid RespostaModel respostaModel, BindingResult bindingResult) {
 
 		if (bindingResult.hasErrors()) {
@@ -70,6 +75,7 @@ public class RespostaController {
 	}
 
 	@PutMapping("/{id}")
+	@ApiOperation(value = "Alteração na resposta")
 	public ResponseEntity<?> update(@PathVariable("id") long id, @RequestBody @Valid RespostaModel respostaModel,
 			BindingResult bindingResult) {
 
@@ -84,6 +90,7 @@ public class RespostaController {
 	}
 
 	@DeleteMapping("/{id}")
+	@ApiOperation(value = "Excluir resposta")
 	public ResponseEntity<?> deleteById(@PathVariable("id") long id) {
 
 		repository.deleteById(id);
@@ -91,6 +98,7 @@ public class RespostaController {
 	}
 	
 	@GetMapping("/criarresposta")
+	@ApiOperation(value = "criar")
 	public void criar() {
 		
 		repository.save(new RespostaModel(userAvaliadorRepository.findById((long) 1).get(), avaliadorRepository.findById((long) 1).get(), itemRepository.findById((long) 1).get(), true));

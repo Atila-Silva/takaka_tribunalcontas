@@ -23,6 +23,8 @@ import com.br.takaka.tribunaldecontas.model.UserMunicipioModel;
 import com.br.takaka.tribunaldecontas.repository.MunicipioRepository;
 import com.br.takaka.tribunaldecontas.repository.UserMunicipioRepository;
 
+import io.swagger.annotations.ApiOperation;
+
 @RestController
 @RequestMapping("/usermunicipio")
 public class UserMunicipioController {
@@ -35,12 +37,14 @@ public class UserMunicipioController {
 	
 	
 	@GetMapping()
+	@ApiOperation(value = "Lista de usuario municipio")
 	public ResponseEntity<List<UserMunicipioModel>> findAll(Model model){
 		List<UserMunicipioModel> users = repository.findAll();
 		return ResponseEntity.ok(users);
 	}
 	
 	@GetMapping("/{id}")
+	@ApiOperation(value = "usuario municipio por ID")
 	public ResponseEntity<UserMunicipioModel> findById(@PathVariable("id") long id) {
 
 		UserMunicipioModel user = repository.findById(id).get();
@@ -48,6 +52,7 @@ public class UserMunicipioController {
 	}
 
 	@PostMapping()
+	@ApiOperation(value = "Salvar novo usuario municipio")
 	public ResponseEntity<?> save(@RequestBody @Valid UserMunicipioModel userModel, BindingResult bindingResult) {
 
 		if (bindingResult.hasErrors()) {
@@ -62,6 +67,7 @@ public class UserMunicipioController {
 		return ResponseEntity.created(location).build();
 	}
 	@PutMapping("/{id}")
+	@ApiOperation(value = "Alteração de usuario municipio")
 	public ResponseEntity<?> update(@PathVariable("id") long id, @RequestBody @Valid UserMunicipioModel userModel, BindingResult bindingResult) {
 		
 		if(bindingResult.hasErrors()) {
@@ -74,6 +80,7 @@ public class UserMunicipioController {
 	}
 	
 	@DeleteMapping("/{id}")
+	@ApiOperation(value = "Excluir usuario municipio")
 	public ResponseEntity<?> deleteById(@PathVariable("id") long id) {
 		
 		repository.deleteById(id);
@@ -81,6 +88,7 @@ public class UserMunicipioController {
 	}
 	
 	@GetMapping("/criaruser")
+	@ApiOperation(value = "criar")
 	public void criaruser() {
 		repository.save(new UserMunicipioModel("Atila", "atila@atila", "kkkkkk", municipioRepository.findById((long) 123341).get()));
 		repository.save(new UserMunicipioModel("jair", "jair@jair", "kkkkkk", municipioRepository.findById((long) 651655).get()));

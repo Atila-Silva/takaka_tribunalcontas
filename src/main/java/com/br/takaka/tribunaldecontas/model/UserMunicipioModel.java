@@ -17,6 +17,8 @@ import javax.validation.constraints.Size;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+import io.swagger.annotations.ApiModelProperty;
+
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 @Entity
 @Table(name = "USER_MUNICIPIO")
@@ -48,6 +50,7 @@ public class UserMunicipioModel {
 	@Column(name = "ID_USER_MUNICIPIO")
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "USER_MUN_SEQ")
 	@SequenceGenerator(name = "USER_MUN_SEQ", sequenceName = "USER_MUN_SEQ", allocationSize = 1)
+	@ApiModelProperty(value = "ID do usuario municipio")
 	public long getIdUserMunicipio() {
 		return idUserMunicipio;
 	}
@@ -64,6 +67,7 @@ public class UserMunicipioModel {
 	@Column(name = "NOME_USER_MUNICIPIO")
 	@NotNull(message = "Nome obrigatório")
 	@Size(min = 2, max = 50, message = "NOME deve ser entre 2 e 40 caracteres")
+	@ApiModelProperty(value = "Nome do usuario municipio")
 	public String getNomeUserMunicipio() {
 		return nomeUserMunicipio;
 	}
@@ -77,6 +81,7 @@ public class UserMunicipioModel {
 	@Column(name = "EMAIL_USER_MUNICIPIO")
 	@NotNull(message = "email obrigatório")
 	@Size(min = 2, max = 50, message = "Email deve ser entre 2 e 40 caracteres")
+	@ApiModelProperty(value = "Email do usuario municipio")
 	public String getEmailUserMunicipio() {
 		return emailUserMunicipio;
 	}
@@ -90,6 +95,7 @@ public class UserMunicipioModel {
 	@Column(name = "SENHA_USER_MUNICIPIO")
 	@NotNull(message = "senha obrigatório")
 	@Size(min = 2, max = 50, message = "Senha deve ser entre 2 e 40 caracteres")
+	@ApiModelProperty(value = "Senha do usuario municipio")
 	public String getSenhaUserMunicipio() {
 		return senhaUserMunicipio;
 	}
@@ -101,6 +107,7 @@ public class UserMunicipioModel {
 
 	@ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "IBGE_MUNICIPIO", nullable = false )
+	@ApiModelProperty(value = "Municipio do usuario municipio")
    public MunicipioModel getMunicipio() {
 		return municipio;
 	}
@@ -111,6 +118,7 @@ public class UserMunicipioModel {
 	}
 	
 	@Column(name = "DATA_CADASTRO")
+	@ApiModelProperty(value = "Data de cadastro do usuario municipio")
 	public LocalDateTime getDataCadastro() {
 		return dataCadastro;
 	}

@@ -13,6 +13,8 @@ import javax.validation.constraints.Size;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+import io.swagger.annotations.ApiModelProperty;
+
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 @Entity
 @Table(name = "MUNICIPIO")
@@ -35,6 +37,7 @@ public class MunicipioModel {
 
 	@Id
 	@Column(name = "IBGE_MUNICIPIO")
+	@ApiModelProperty(value = "IBGE do municipio")
 	public long getIbgeMunicipio() {
 		return ibgeMunicipio;
 	}
@@ -48,6 +51,7 @@ public class MunicipioModel {
 	@Column(name = "NOME_MUNICIPIO")
 	@NotNull(message = "nome obrigatória")
 	@Size(min = 2, max = 50, message = "o NOME deve ser entre 2 e 50 caracteres")
+	@ApiModelProperty(value = "Nome do municipio")
 	public String getNomeMunicipio() {
 		return nomeMunicipio;
 	}
@@ -60,6 +64,7 @@ public class MunicipioModel {
 
 	@Column(name = "URL_MUNICIPIO")
 	@Size(min = 2, max = 50, message = "A url deve ser entre 2 e 50 caracteres")
+	@ApiModelProperty(value = "URL do municipio")
 	public String getUrlMunicipio() {
 		return urlMunicipio;
 	}
@@ -70,6 +75,7 @@ public class MunicipioModel {
 	}
 	
 	@Column(name = "DATA_CADASTRO")
+	@ApiModelProperty(value = "Dtata de cadastro do municipio")
 	public LocalDateTime getDataCadastro() {
 		return dataCadastro;
 	}

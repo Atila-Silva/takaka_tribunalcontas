@@ -22,6 +22,8 @@ import com.br.takaka.tribunaldecontas.model.AvaliacaoModel;
 import com.br.takaka.tribunaldecontas.repository.AvaliacaoRepository;
 import com.br.takaka.tribunaldecontas.repository.MunicipioRepository;
 
+import io.swagger.annotations.ApiOperation;
+
 @RestController
 @RequestMapping("/avaliacao")
 public class AvaliacaoController {
@@ -33,6 +35,7 @@ public class AvaliacaoController {
 	public MunicipioRepository municipioRepository;
 
 	@GetMapping()
+	@ApiOperation(value = "Lista de avaliação")
 	public ResponseEntity<List<AvaliacaoModel>> findAll() {
 
 		List<AvaliacaoModel> Avaliacoes = repository.findAll();
@@ -40,6 +43,7 @@ public class AvaliacaoController {
 	}
 
 	@GetMapping("/{id}")
+	@ApiOperation(value = "Avaliação por ID")
 	public ResponseEntity<AvaliacaoModel> findById(@PathVariable("id") long id) {
 
 		AvaliacaoModel Avaliacao = repository.findById(id).get();
@@ -47,6 +51,7 @@ public class AvaliacaoController {
 	}
 
 	@PostMapping()
+	@ApiOperation(value = "Salvar nova avaliação")
 	public ResponseEntity<?> save(@RequestBody @Valid AvaliacaoModel avaliacaoModel, BindingResult bindingResult) {
 
 		if (bindingResult.hasErrors()) {
@@ -62,6 +67,7 @@ public class AvaliacaoController {
 	}
 
 	@PutMapping("/{id}")
+	@ApiOperation(value = "Alteração na avaliação")
 	public ResponseEntity<?> update(@PathVariable("id") long id, @RequestBody @Valid AvaliacaoModel avaliacaoModel,
 			BindingResult bindingResult) {
 
@@ -76,6 +82,7 @@ public class AvaliacaoController {
 	}
 
 	@DeleteMapping("/{id}")
+	@ApiOperation(value = "Excluir avaliação")
 	public ResponseEntity<?> deleteById(@PathVariable("id") long id) {
 
 		repository.deleteById(id);
@@ -83,6 +90,7 @@ public class AvaliacaoController {
 	}
 	
 	@GetMapping("/criaravaliacao")
+	@ApiOperation(value = "criar")
 	public void criar() {
 		repository.save(new AvaliacaoModel(municipioRepository.findById((long) 123341).get()));
 		repository.save(new AvaliacaoModel(municipioRepository.findById((long) 651655).get()));

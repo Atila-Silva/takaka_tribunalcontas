@@ -22,6 +22,8 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import com.br.takaka.tribunaldecontas.model.UserAvaliadorModel;
 import com.br.takaka.tribunaldecontas.repository.UserAvaliadorRepository;
 
+import io.swagger.annotations.ApiOperation;
+
 @RestController
 @RequestMapping("/useravaliador")
 public class UserAvaliadorController {
@@ -32,12 +34,14 @@ public class UserAvaliadorController {
 		
 	
 	@GetMapping()
+	@ApiOperation(value = "Lista de usuarios avaliação")
 	public ResponseEntity<List<UserAvaliadorModel>> findAll(Model model){
 		List<UserAvaliadorModel> users = repository.findAll();
 		return ResponseEntity.ok(users);
 	}
 	
 	@GetMapping("/{id}")
+	@ApiOperation(value = "Usuario avaliação por ID")
 	public ResponseEntity<UserAvaliadorModel> findById(@PathVariable("id") long id) {
 
 		UserAvaliadorModel user = repository.findById(id).get();
@@ -45,6 +49,7 @@ public class UserAvaliadorController {
 	}
 
 	@PostMapping()
+	@ApiOperation(value = "Salvar nova usuario avaliação")
 	public ResponseEntity<?> save(@RequestBody @Valid UserAvaliadorModel userModel, BindingResult bindingResult) {
 
 		if (bindingResult.hasErrors()) {
@@ -59,6 +64,7 @@ public class UserAvaliadorController {
 		return ResponseEntity.created(location).build();
 	}
 	@PutMapping("/{id}")
+	@ApiOperation(value = "Alteração na usuario avaliação")
 	public ResponseEntity<?> update(@PathVariable("id") long id, @RequestBody @Valid UserAvaliadorModel userModel, BindingResult bindingResult) {
 		
 		if(bindingResult.hasErrors()) {
@@ -71,6 +77,7 @@ public class UserAvaliadorController {
 	}
 	
 	@DeleteMapping("/{id}")
+	@ApiOperation(value = "Excluir usuario avaliação")
 	public ResponseEntity<?> deleteById(@PathVariable("id") long id) {
 		
 		repository.deleteById(id);
@@ -78,6 +85,7 @@ public class UserAvaliadorController {
 	}
 	
 	@GetMapping("/criaruserava")
+	@ApiOperation(value = "criar")
 	public void criaruser() {
 		repository.save(new UserAvaliadorModel("atila", "atila@atila", "25123"));
 		repository.save(new UserAvaliadorModel("jair", "jair@jair", "984984"));

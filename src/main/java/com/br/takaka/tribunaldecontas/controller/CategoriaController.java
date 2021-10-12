@@ -21,6 +21,8 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import com.br.takaka.tribunaldecontas.model.CategoriaModel;
 import com.br.takaka.tribunaldecontas.repository.CategoriaRepository;
 
+import io.swagger.annotations.ApiOperation;
+
 
 
 @RestController
@@ -31,6 +33,7 @@ public class CategoriaController {
 	public CategoriaRepository repository;
 
 	@GetMapping()
+	@ApiOperation(value = "Lista de categoria")
 	public ResponseEntity<List<CategoriaModel>> findAll() {
 
 		List<CategoriaModel> categorias = repository.findAll();
@@ -38,6 +41,7 @@ public class CategoriaController {
 	}
 
 	@GetMapping("/{id}")
+	@ApiOperation(value = "Categoria por ID")
 	public ResponseEntity<CategoriaModel> findById(@PathVariable("id") long id) {
 
 		CategoriaModel categoria = repository.findById(id).get();
@@ -45,6 +49,7 @@ public class CategoriaController {
 	}
 
 	@PostMapping()
+	@ApiOperation(value = "Salvar nova categoria")
 	public ResponseEntity<?> save(@RequestBody @Valid CategoriaModel categoriaModel, BindingResult bindingResult) {
 
 		if (bindingResult.hasErrors()) {
@@ -60,6 +65,7 @@ public class CategoriaController {
 	}
 
 	@PutMapping("/{id}")
+	@ApiOperation(value = "Alteração em categoria")
 	public ResponseEntity<?> update(@PathVariable("id") long id, @RequestBody @Valid CategoriaModel categoriaModel,
 			BindingResult bindingResult) {
 
@@ -74,6 +80,7 @@ public class CategoriaController {
 	}
 
 	@DeleteMapping("/{id}")
+	@ApiOperation(value = "Excluir categoria")
 	public ResponseEntity<?> deleteById(@PathVariable("id") long id) {
 
 		repository.deleteById(id);
@@ -81,6 +88,7 @@ public class CategoriaController {
 	}
 	
 	@GetMapping("/criarcategoria")
+	@ApiOperation(value = "criar")
 	public void criar() {
 		repository.save(new CategoriaModel("Endereço"));
 		repository.save(new CategoriaModel("gastos"));

@@ -15,6 +15,8 @@ import javax.persistence.Table;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+import io.swagger.annotations.ApiModelProperty;
+
 
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 @Entity
@@ -45,6 +47,7 @@ public class RespostaModel {
 	@Column(name = "ID_RESPOSTA")
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "RES_ID_SEQ")
 	@SequenceGenerator(name = "RES_ID_SEQ", sequenceName = "RES_ID_SEQ", allocationSize = 1)
+	@ApiModelProperty(value = "ID da resposta")
 	public Long getId() {
 		return id;
 	}
@@ -55,6 +58,7 @@ public class RespostaModel {
 
 	@ManyToOne()
     @JoinColumn(name = "ID_USER_MUNICIPIO", nullable = false )
+	@ApiModelProperty(value = "ID do usuario que fez a avaiação")
 	public UserAvaliadorModel getUserAvaliador() {
 		return UserAvaliador;
 	}
@@ -66,6 +70,7 @@ public class RespostaModel {
 	@JsonIgnore
 	@ManyToOne()
     @JoinColumn(name = "ID_AVALIACAO", nullable = false )
+	@ApiModelProperty(value = "ID da Avaliação")
 	public AvaliacaoModel getAvaliacao() {
 		return avaliacao;
 	}
@@ -76,6 +81,7 @@ public class RespostaModel {
 	
 	@ManyToOne()
     @JoinColumn(name = "ID_ITEM", nullable = false )
+	@ApiModelProperty(value = "item que esta sendo avaliado")
 	public ItemModel getItemAvaliacao() {
 		return itemAvaliacao;
 	}
@@ -85,6 +91,7 @@ public class RespostaModel {
 	}
 	
 	@Column(name = "CUMPRIR")
+	@ApiModelProperty(value = "resposta se esta ou não cumprindo")
 	public boolean isCumprir() {
 		return cumprir;
 	}
@@ -94,6 +101,7 @@ public class RespostaModel {
 	}
 	
 	@Column(name = "DATA_CADASTRO")
+	@ApiModelProperty(value = "data da resposta")
 	public LocalDateTime getDataResposta() {
 		return dataResposta;
 	}
