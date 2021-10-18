@@ -1,7 +1,10 @@
 package com.br.takaka.tribunaldecontas;
 
+import org.apache.catalina.Context;
+import org.apache.tomcat.util.scan.StandardJarScanner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.web.embedded.tomcat.TomcatServletWebServerFactory;
 import org.springframework.context.annotation.Bean;
 
 import springfox.documentation.builders.PathSelectors;
@@ -26,6 +29,16 @@ public class TribunaldecontasApplication {
 	            .apis(RequestHandlerSelectors.basePackage("com.br.takaka.tribunaldecontas.controller"))
 	            .paths(PathSelectors.any())
 	            .build();
+	}
+	
+	@Bean
+	public TomcatServletWebServerFactory tomcatFactory() {
+		return new TomcatServletWebServerFactory() {
+			@Override
+			protected void postProcessContext(Context context) {
+				((StandardJarScanner) context.getJarScanner()).setScanManifest(false);
+			}
+		};
 	}
 
 }

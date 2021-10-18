@@ -1,6 +1,7 @@
 package com.br.takaka.tribunaldecontas.exception;
 
-public class ResponseBusinessException {
+@SuppressWarnings("serial")
+public class ResponseBusinessException extends Exception {
 	
 private String message;
 	

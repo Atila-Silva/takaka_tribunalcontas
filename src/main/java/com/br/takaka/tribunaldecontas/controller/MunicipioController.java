@@ -18,6 +18,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import com.br.takaka.tribunaldecontas.business.MunicipioBusiness;
+import com.br.takaka.tribunaldecontas.exception.ResponseBusinessException;
 import com.br.takaka.tribunaldecontas.model.MunicipioModel;
 import com.br.takaka.tribunaldecontas.repository.MunicipioRepository;
 
@@ -29,6 +31,9 @@ public class MunicipioController {
 	
 	@Autowired
 	public MunicipioRepository repository;
+	
+	@Autowired
+	public MunicipioBusiness municipiosBusiness;
 	
 	@GetMapping()
 	@ApiOperation(value = "Lista de municipios")
@@ -48,13 +53,11 @@ public class MunicipioController {
 
 	@PostMapping()
 	@ApiOperation(value = "Salvar novo municipios")
-	public ResponseEntity<?> save(@RequestBody @Valid MunicipioModel municipioModel, BindingResult bindingResult) {
+	public ResponseEntity<?> save(@RequestBody @Valid MunicipioModel municipioModel, BindingResult bindingResult) throws ResponseBusinessException {
 
-		if (bindingResult.hasErrors()) {
-			return ResponseEntity.badRequest().build();
-		}
+		MunicipioModel municipio = municipiosBusiness.applyBusiness(municipioModel);
 
-		MunicipioModel municipio = repository.save(municipioModel);
+		repository.save(municipio);
 
 		URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
 				.buildAndExpand(municipio.getIbgeMunicipio()).toUri();
@@ -64,15 +67,12 @@ public class MunicipioController {
 
 	@PutMapping("/{id}")
 	@ApiOperation(value = "Alteção no municipios")
-	public ResponseEntity<?> update(@PathVariable("ibge") long ibge, @RequestBody @Valid MunicipioModel municipioModel,
-			BindingResult bindingResult) {
+	public ResponseEntity<?> update(@PathVariable("ibge") long ibge, @RequestBody @Valid MunicipioModel municipioModel) throws ResponseBusinessException {
 
-		if (bindingResult.hasErrors()) {
-			return ResponseEntity.badRequest().build();
-		}
+		MunicipioModel municipio = municipiosBusiness.applyBusiness(municipioModel);
 
-		municipioModel.setIbgeMunicipio(ibge);
-		repository.save(municipioModel);
+		municipio.setIbgeMunicipio(ibge);
+		repository.save(municipio);
 
 		return ResponseEntity.ok().build();
 	}
