@@ -67,7 +67,7 @@ public class MunicipioController {
 
 	@PutMapping("/{id}")
 	@ApiOperation(value = "Alteção no municipios")
-	public ResponseEntity<?> update(@PathVariable("ibge") long ibge, @RequestBody @Valid MunicipioModel municipioModel) throws ResponseBusinessException {
+	public ResponseEntity<?> update(@PathVariable("id") long ibge, @RequestBody @Valid MunicipioModel municipioModel) throws ResponseBusinessException {
 
 		MunicipioModel municipio = municipiosBusiness.applyBusiness(municipioModel);
 
@@ -88,12 +88,9 @@ public class MunicipioController {
 	@GetMapping("/criarmunicipio")
 	@ApiOperation(value = "criar")
 	public void criaruser() {
-		repository.save(new MunicipioModel(123341, "Maua", "www.maua"));
-		repository.save(new MunicipioModel(651655, "Guarulhos", "www.Guarulhos"));
-		repository.save(new MunicipioModel(984941, "bauru", "www.bauru"));
-		repository.save(new MunicipioModel(659812, "osasco", "www.osasco"));
-		repository.save(new MunicipioModel(984212, "santo andre", "www.santo"));
-		
+	
 	}
+	
+
 
 }

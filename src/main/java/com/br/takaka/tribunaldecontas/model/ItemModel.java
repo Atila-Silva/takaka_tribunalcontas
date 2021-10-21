@@ -54,7 +54,7 @@ public class ItemModel {
 
 	@Column(name = "ITEM_PERGUNTA")
 	@NotNull(message = "Pergunta obrigatória")
-	@Size(min = 2, max = 50, message = "A pergunta deve ser entre 2 e 100 caracteres")
+	@Size(min = 2, max = 500, message = "A pergunta deve ser entre 2 e 100 caracteres")
 	@ApiModelProperty(value = "Pergunta do item")
 	public String getPergunta() {
 		return pergunta;

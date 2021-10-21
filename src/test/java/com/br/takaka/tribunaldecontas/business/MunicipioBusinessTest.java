@@ -25,19 +25,19 @@ public class MunicipioBusinessTest {
 		
 		String actual = municipioBusiness.changeNomeToUpperCase(nome);
 		
-		assertEquals("Erro ao transforma o nome do municipio em maiúscula.",expected, actual);
+		assertEquals(expected, actual);
 	}
-	/*
-	@Test(expecte)
+	
+	@Test()
 	public void testVerifiyNomeProdutoWithTeste() throws ResponseBusinessException {
 
 		// GIVEN
-		String nomeMunicipio = "Municipio de Teste";
+		String nomeMunicipio = "Municipio";
 
 		// WHEN
 		municipioBusiness.verifyNomeMunicipio(nomeMunicipio);
 	}
-	*/
+	
 	@Test()
 	public void testVerifiyNomeProdutoWithoutTeste() throws ResponseBusinessException {
 
@@ -56,7 +56,7 @@ public class MunicipioBusinessTest {
 		
 		MunicipioModel actual = municipioBusiness.applyBusiness(municipioModel);
 		
-		assertEquals(expected.toString(), actual.toString());
+		assertEquals(expected.getNomeMunicipio(), actual.getNomeMunicipio());
 		
 	}
 	
